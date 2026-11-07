@@ -39,25 +39,35 @@ a.btn:active,button.btn:active{transform:scale(.98)}
 .team a:hover{border-color:var(--gold)}
 .team a:last-child:nth-child(odd){grid-column:1/-1;justify-content:center}
 .in{flex-shrink:0;width:28px;height:28px;border-radius:7px;background:#33271F;color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-weight:800;font-size:13px}
-/* flow */
-#flow{display:none}
-#flow.open{display:block}
-.flow{display:flex;flex-direction:column;align-items:center}
-.step{width:100%;display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
-.step img{width:58px;height:120px;object-fit:cover;object-position:top;border-radius:10px;border:1.5px solid #4A3A2D;flex-shrink:0;background:#120D0A}
-.step .n{font-family:'Amiri',serif;font-size:13px;color:var(--bronze)}
-.step b{display:block;font-size:16px;margin:2px 0 4px}
-.step p{font-size:13px;line-height:1.7;color:var(--muted)}
-.down{width:2px;height:22px;background:var(--line);position:relative}
-.down:after{content:"";position:absolute;bottom:-4px;left:-4px;width:8px;height:8px;border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(-45deg)}
-.split{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.opt{border-radius:14px;padding:12px;text-align:center;border:1px solid var(--line);background:var(--card)}
-.opt.hold{background:#2E241B;border-color:var(--gold)}
-.opt .k{font-size:14px;font-weight:700}
-.opt .v{font-size:22px;font-weight:800;color:var(--gold2);margin-top:4px}
-.opt .s{font-size:11px;color:var(--muted);margin-top:2px}
-.step.pay{background:var(--gold);border-color:var(--gold);color:#1C1511}
-.step.pay p,.step.pay .n{color:#4A3726}
+/* flow overlay */
+#flow{position:fixed;inset:0;z-index:20;background:var(--bg);overflow-y:auto;display:none;-webkit-overflow-scrolling:touch}
+#flow.open{display:block;animation:up .28s ease}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+body.lock{overflow:hidden}
+.fbar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:rgba(28,21,17,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.ft{font-family:'Amiri',serif;font-weight:700;font-size:26px;color:var(--gold2);line-height:1.2}
+.fs{font-size:12px;color:var(--muted)}
+.x{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--cream);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fbody{max-width:440px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-direction:column;align-items:center}
+.scr{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.ph{width:250px;padding:7px;border-radius:38px;background:#0E0A08;border:1.5px solid #4A3A2D;box-shadow:0 24px 40px -18px rgba(0,0,0,.8)}
+.ph img{display:block;width:100%;border-radius:31px}
+.scr figcaption{text-align:center;font-size:14px;line-height:1.7;color:var(--muted);max-width:280px}
+.scr figcaption b{display:block;font-size:19px;color:var(--cream);margin-bottom:2px}
+.scr figcaption span,.q span,.payend span{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#1C1511;font-weight:800;font-size:13px;margin-bottom:6px}
+.down{width:2px;height:40px;margin:16px 0;background:linear-gradient(var(--line),var(--gold));position:relative}
+.down:after{content:"";position:absolute;bottom:-2px;left:-4px;width:8px;height:8px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
+.q{display:flex;flex-direction:column;align-items:center;font-family:'Amiri',serif;font-weight:700;font-size:30px;color:var(--gold2);margin-bottom:16px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
+.scr.sm .ph{width:100%;padding:5px;border-radius:26px}
+.scr.sm .ph img{border-radius:21px}
+.scr.sm.hold .ph{border-color:var(--gold)}
+.scr.sm figcaption{font-size:12px}
+.scr.sm figcaption b{font-size:15px}
+.scr.sm em{display:block;font-style:normal;font-size:22px;font-weight:800;color:var(--gold2)}
+.payend{width:100%;display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px;border-radius:20px;background:var(--gold);color:#4A3726;font-size:14px}
+.payend b{font-size:20px;color:#1C1511}
+.payend span{background:#1C1511;color:var(--gold2)}
 .foot{margin-top:42px;font-size:12px;color:#7A6550;text-align:center;line-height:1.8}
 :focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
 </style>
@@ -84,31 +94,10 @@ a.btn:active,button.btn:active{transform:scale(.98)}
     <button class="btn" id="flowBtn" type="button" aria-expanded="false" aria-controls="flow">
       <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M6 7.5v4a3 3 0 0 0 3 3h6a3 3 0 0 1 3 3v-1"/></svg></span>
       <span class="tx">شوفي اليوزر فلو<small>رحلة المستخدم من أول شاشة للدفع</small></span>
-      <svg class="arr" id="flowArr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      <svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
     </button>
   </div>
 
-  <section class="sec" id="flow" aria-label="اليوزر فلو">
-    <h2>اليوزر فلو</h2>
-    <div class="flow">
-      <div class="step"><img src="screens/01-home.png" alt="شاشة الرئيسية"><div><span class="n">١</span><b>الرئيسية</b><p>مجموع أصولك وزكاتك، وكم باقي على الحول.</p></div></div>
-      <div class="down"></div>
-      <div class="step"><img src="screens/03-assets.png" alt="شاشة الأصول"><div><span class="n">٢</span><b>إضافة أصل</b><p>ذهب، أسهم، استثمار، أو عملات رقمية، بأي عملة.</p></div></div>
-      <div class="down"></div>
-      <div class="step"><img src="screens/04-add-asset-hold.png" alt="شاشة إضافة أصل"><div><span class="n">٣</span><b>ليش شاريه؟</b><p>السؤال اللي يميز مكيال. مثال: ٥٠ سهم أبل.</p></div></div>
-      <div class="down"></div>
-      <div class="split">
-        <div class="opt hold"><div class="k">أحتفظ فيه</div><div class="v">٢٧٠ ر.س</div><div class="s">٢٫٥٪ × ٢٥٪</div></div>
-        <div class="opt"><div class="k">أبيع وأشتري</div><div class="v">١٬٠٧٨ ر.س</div><div class="s">٢٫٥٪ × ١٠٠٪</div></div>
-      </div>
-      <div class="down"></div>
-      <div class="step"><img src="screens/02-currencies.png" alt="شاشة العملات"><div><span class="n">٤</span><b>التحويل للريال</b><p>كل عملة تتحول للريال وتنجمع في مكان واحد.</p></div></div>
-      <div class="down"></div>
-      <div class="step"><img src="screens/06-hawl.png" alt="شاشة الحول"><div><span class="n">٥</span><b>تذكير الحول</b><p>عداد بالأيام، وتذكير قبل أسبوع.</p></div></div>
-      <div class="down"></div>
-      <div class="step pay"><div style="padding:6px 4px"><span class="n">٦</span><b>الدفع عبر إحسان</b><p>أو جمعية مرخصة تختارينها.</p></div></div>
-    </div>
-  </section>
 
   <section class="sec" aria-label="فريق مكيال">
     <h2>فريق مكيال</h2>
@@ -117,6 +106,30 @@ a.btn:active,button.btn:active{transform:scale(.98)}
 
   <div class="foot">FTEC341 · FinTech &amp; Financial Transformation<br>جامعة الأميرة نورة بنت عبدالرحمن</div>
 </main>
+  <div id="flow" role="dialog" aria-modal="true" aria-label="اليوزر فلو">
+    <div class="fbar">
+      <div><div class="ft">اليوزر فلو</div><div class="fs">رحلة المستخدم في مكيال</div></div>
+      <button type="button" class="x" id="flowClose" aria-label="إغلاق"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="fbody">
+      <figure class="scr"><div class="ph"><img src="screens/01-home.png" alt="شاشة الرئيسية"></div><figcaption><span>١</span><b>الرئيسية</b>مجموع أصولك وزكاتك، وكم باقي على الحول</figcaption></figure>
+      <div class="down"></div>
+      <figure class="scr"><div class="ph"><img src="screens/03-assets.png" alt="شاشة الأصول"></div><figcaption><span>٢</span><b>الأصول</b>تضيفين ذهب، أسهم، استثمار، أو عملات رقمية</figcaption></figure>
+      <div class="down"></div>
+      <div class="q"><span>٣</span>ليش شاريه؟</div>
+      <div class="pair">
+        <figure class="scr sm hold"><div class="ph"><img src="screens/04-add-asset-hold.png" alt="إضافة أصل: أحتفظ فيه"></div><figcaption><b>أحتفظ فيه</b><em>٢٧٠ ر.س</em>٢٫٥٪ × ٢٥٪</figcaption></figure>
+        <figure class="scr sm"><div class="ph"><img src="screens/05-add-asset-trade.png" alt="إضافة أصل: أبيع وأشتري"></div><figcaption><b>أبيع وأشتري</b><em>١٬٠٧٨ ر.س</em>٢٫٥٪ × ١٠٠٪</figcaption></figure>
+      </div>
+      <div class="down"></div>
+      <figure class="scr"><div class="ph"><img src="screens/02-currencies.png" alt="شاشة العملات"></div><figcaption><span>٤</span><b>العملات</b>كل عملة تتحول للريال وتنجمع بمكان واحد</figcaption></figure>
+      <div class="down"></div>
+      <figure class="scr"><div class="ph"><img src="screens/06-hawl.png" alt="شاشة الحول"></div><figcaption><span>٥</span><b>الحول</b>عداد بالأيام وتذكير قبل أسبوع</figcaption></figure>
+      <div class="down"></div>
+      <div class="payend"><span>٦</span><b>الدفع عبر إحسان</b>أو جمعية مرخصة تختارينها</div>
+    </div>
+  </div>
+
 
 <script>
 // ===== عدلي الروابط هنا =====
@@ -143,13 +156,11 @@ CONFIG.team.forEach(p => {
   a.lastChild.textContent = p.name;
   team.appendChild(a);
 });
-const fb = document.getElementById('flowBtn'), fl = document.getElementById('flow'), fa = document.getElementById('flowArr');
-fb.addEventListener('click', () => {
-  const open = fl.classList.toggle('open');
-  fb.setAttribute('aria-expanded', open);
-  fa.style.transform = open ? 'rotate(180deg)' : '';
-  if (open) fl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
+const fb = document.getElementById('flowBtn'), fl = document.getElementById('flow');
+function setFlow(open){ fl.classList.toggle('open', open); document.body.classList.toggle('lock', open); fb.setAttribute('aria-expanded', open); if(open){ fl.scrollTop = 0; document.getElementById('flowClose').focus(); } else fb.focus(); }
+fb.addEventListener('click', () => setFlow(true));
+document.getElementById('flowClose').addEventListener('click', () => setFlow(false));
+fl.addEventListener('keydown', e => { if (e.key === 'Escape') setFlow(false); });
 </script>
 </body>
 </html>
