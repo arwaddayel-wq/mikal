@@ -1,4 +1,4 @@
-# Mikal · ميكال
+# Mikyal · مكيال
 
 **Zakat, measured right.** A mobile app concept that calculates zakat on global, multi‑currency and crypto investments for individuals in Saudi Arabia.
 
@@ -17,7 +17,7 @@ Saudi individuals calculate their own zakat, and more of their wealth now sits o
 
 ## The solution
 
-Mikal brings every asset, in any currency, into one zakat view and calculates zakat by **why** each asset is held.
+Mikyal brings every asset, in any currency, into one zakat view and calculates zakat by **why** each asset is held.
 
 | Feature | What it does |
 |---|---|

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0E0B08">
-<title>Mikal ميكال</title>
+<title>Mikyal مكيال</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Cormorant+Garamond:wght@600;700&display=swap">
 <style>
@@ -133,7 +133,7 @@ select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 
 <div class="stage">
   <aside class="guide" aria-label="مهام التجربة">
-    <h1>Mikal<span>ميكال</span></h1>
+    <h1>Mikyal<span>مكيال</span></h1>
     <p>جربي التطبيق كمستخدمة حقيقية. هذي ثلاث مهام قصيرة:</p>
     <ol class="tasks" id="tasks">
       <li data-t="cur"><span class="chk"></span><span>بدّلي العملة في الرئيسية إلى يورو أو دولار</span></li>
@@ -343,14 +343,14 @@ function sheetHTML(){
   if(!sheet)return '';
   let inner='';
   if(sheet==='notes'){const T=totals();inner='<b style="font-size:18px">الإشعارات</b><div class="glass item"><span class="ic">'+svg('clock','#D9B88A')+'</span><div class="meta"><b>'+(T.start?'باقي '+T.left+' يوم على زكاتك':'أضيفي أول أصل')+'</b><div class="sub">بنذكرك قبل الموعد بأسبوع</div></div></div><div class="glass item"><span class="ic">'+svg('gold','#D9B88A')+'</span><div class="meta"><b>سعر الذهب اليوم</b><div class="sub">عيار 24: '+GOLD['24']+' ر.س للجرام (سعر تجريبي)</div></div></div>'}
-  if(sheet==='profile')inner='<b style="font-size:18px">الإعدادات</b><div class="sub">هذي نسخة تجريبية من ميكال. تقدرين ترجعين للبيانات الأصلية أو تبدين بمحفظة فاضية.</div><button class="btn ghost" data-data="sample">إعادة البيانات التجريبية</button><button class="btn ghost" data-data="empty">ابدئي بمحفظة فاضية</button>';
+  if(sheet==='profile')inner='<b style="font-size:18px">الإعدادات</b><div class="sub">هذي نسخة تجريبية من مكيال. تقدرين ترجعين للبيانات الأصلية أو تبدين بمحفظة فاضية.</div><button class="btn ghost" data-data="sample">إعادة البيانات التجريبية</button><button class="btn ghost" data-data="empty">ابدئي بمحفظة فاضية</button>';
   if(sheet==='pay'){const T=totals();inner='<b style="font-size:18px">تأكيد الدفع</b><div class="glass" style="padding:4px 16px"><div class="kv"><span>المبلغ</span><b>'+f(T.zakat)+' ر.س</b></div><div class="kv"><span>عن طريق</span><span>'+(S.payVia==='ihsan'?'منصة إحسان':'جمعية خيرية مرخصة')+'</span></div><div class="kv"><span>الحساب</span><span>2.5% من '+f(T.base)+' ر.س</span></div></div><span class="demo" style="align-self:center">نسخة تجريبية · ما راح يتم خصم أي مبلغ</span><button class="btn" data-pay="1">تأكيد الدفع</button>'}
   return '<div class="sheet-wrap" data-close="1"><div class="sheet" role="dialog" aria-modal="true">'+inner+'<button class="btn ghost" data-close="1">إغلاق</button></div></div>';
 }
 
 function render(){
   const v={home,currencies,assets,add:addView,hawl}[S.tab]||home;
-  root.innerHTML=glows()+'<div class="view">'+v()+'</div>'+sheetHTML()+(S.started?'':'<div class="splash"><span class="demo">نسخة تجريبية</span><div class="logo">Mikal</div><div class="ar">ميكال</div><div class="sub" style="font-size:16px;max-width:280px;line-height:1.7">زكاة استثماراتك بكل العملات، محسوبة بالضبط</div><button class="btn" data-start="1" style="max-width:260px;margin-top:10px">ابدأ التجربة</button></div>');
+  root.innerHTML=glows()+'<div class="view">'+v()+'</div>'+sheetHTML()+(S.started?'':'<div class="splash"><span class="demo">نسخة تجريبية</span><div class="logo">Mikyal</div><div class="ar">مكيال</div><div class="sub" style="font-size:16px;max-width:280px;line-height:1.7">زكاة استثماراتك بكل العملات، محسوبة بالضبط</div><button class="btn" data-start="1" style="max-width:260px;margin-top:10px">ابدأ التجربة</button></div>');
   if(S.tab==='add')paintPreview();
   paintTasks();
 }
